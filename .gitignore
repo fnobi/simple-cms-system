@@ -1,2 +1,3 @@
 node_modules
-public/post
+public/post/*
+!public/post/.gitkeep
