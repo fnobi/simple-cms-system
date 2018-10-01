@@ -1,0 +1,21 @@
+{
+  "name": "simple-cms-system",
+  "version": "1.0.0",
+  "description": "for NetlifyCMS tutorial.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fnobi/simple-cms-system.git"
+  },
+  "keywords": [
+    "netlify"
+  ],
+  "author": "Fujisawa Shin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fnobi/simple-cms-system/issues"
+  },
+  "homepage": "https://github.com/fnobi/simple-cms-system#readme"
+}
