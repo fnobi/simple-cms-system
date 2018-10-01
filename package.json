@@ -20,7 +20,6 @@
   "homepage": "https://github.com/fnobi/simple-cms-system#readme",
   "dependencies": {
     "mz": "^2.7.0",
-    "pug": "^2.0.3",
-    "simple-reproduction": "^1.4.0"
+    "pug": "^2.0.3"
   }
 }
