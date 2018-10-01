@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "for NetlifyCMS tutorial.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-post": "node scripts/build-post"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/fnobi/simple-cms-system/issues"
   },
-  "homepage": "https://github.com/fnobi/simple-cms-system#readme"
+  "homepage": "https://github.com/fnobi/simple-cms-system#readme",
+  "dependencies": {
+    "mz": "^2.7.0",
+    "pug": "^2.0.3",
+    "simple-reproduction": "^1.4.0"
+  }
 }
