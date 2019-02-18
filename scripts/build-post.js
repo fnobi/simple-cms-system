@@ -4,23 +4,46 @@ const pug = require('pug');
 
 const SRC = 'src/';
 const POSTS = 'posts/';
-const DEST = 'public/post/';
+const DEST = 'public/';
 
-const TEMPLATE_PATH = `${SRC}/pug/post.pug`;
+const INDEX_TEMPLATE_PATH = `${SRC}/pug/index.pug`;
+const POST_TEMPLATE_PATH = `${SRC}/pug/post.pug`;
 
 Promise.all([
-  fs.readFile(TEMPLATE_PATH, 'utf8'),
+  fs.readFile(INDEX_TEMPLATE_PATH, 'utf8'),
+  fs.readFile(POST_TEMPLATE_PATH, 'utf8'),
   fs.readdir(POSTS)
-]).then(([template, files]) => {
-  const getHtml = pug.compile(template);
+]).then(([indexTemplate, postTemplate, files]) => {
+  const getIndexHtml = pug.compile(indexTemplate);
+  const getPostHtml = pug.compile(postTemplate);
 
-  files.forEach((filePath) => {
-    fs.readFile(`${POSTS}${filePath}`, 'utf8').then((body) => {
-      const basename = path.basename(filePath, '.json');
-      const dest = `${DEST}${basename}.html`;
-      const locals = JSON.parse(body);
-      const html = getHtml(locals);
-      fs.writeFile(dest, html, 'utf8');
+  Promise.all(
+    files.map(
+      (filePath) => fs.readFile(`${POSTS}${filePath}`, 'utf8')
+    )
+  ).then(
+    (bodies) => bodies.map((body, index) => {
+      const basename = path.basename(files[index], '.json');
+      return {
+        data: JSON.parse(body),
+        href: `post/${basename}.html`
+      };
+    })
+  ).then((posts) => {
+    // top page
+    fs.writeFile(
+      `${DEST}index.html`,
+      getIndexHtml({ posts }),
+      'utf8'
+    );
+
+    // post page
+    posts.forEach((post) => {
+      fs.writeFile(
+        `${DEST}${post.href}`,
+        getPostHtml(post.data),
+        'utf8'
+      );
     });
   });
 });
