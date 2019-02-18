@@ -1,0 +1,10 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="utf-8")
+    title top
+  body
+    h1 top
+    ul
+      each post in posts
+        li: a(href=post.href)= post.data.title
